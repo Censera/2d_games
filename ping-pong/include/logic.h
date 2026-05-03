@@ -8,7 +8,7 @@ void	UpdateGame(Game *g);
 void	PauseGame(Game *g);
 void	ResetGame(Game *g);
 
-static	void	ResetBall(Game *g);
+void	ResetBall(Game *g);
 
 void	HandleInput(Game *g);
 

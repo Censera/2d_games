@@ -11,6 +11,7 @@
 #	define	FG_COLOR	(Color){239, 111, 108, 255}
 
 #	define	PADDLE_SIZE	(Vector2){15.0f, 70.0f}
+#	define	PADDLE_HITBOX_PADDING	8.0f
 #	define	PADDLE_SPEED	600.0f
 #	define	BALL_SPEED	600.0f
 #	define	BALL_RADIUS	10.0f

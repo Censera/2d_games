@@ -14,7 +14,7 @@ void	LoadAssets(Assets *a)
 	a->sounds[0] = LoadSoundFromWave(hit); UnloadWave(hit);
 
 	Wave	score = LoadWaveFromMemory(".wav", score_wav, score_wav_len);
-	a->sounds[1] = LoadSoundFromWave(score); UnloadWave(hit);
+	a->sounds[1] = LoadSoundFromWave(score); UnloadWave(score);
 	}
 
 void	InitGame(Game *g)

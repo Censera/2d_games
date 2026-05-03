@@ -63,9 +63,9 @@ void	UpdateCollision(Game *g, Player *p)
 	Rectangle	paddle = (Rectangle)
 	{
 		p->position.x,
-		p->position.y - 8,
+		p->position.y -PADDLE_HITBOX_PADDING,
 		p->size.x,
-		p->size.y + 8,
+		p->size.y +PADDLE_HITBOX_PADDING,
 	};
 
 	if (CheckCollisionCircleRec(g->ball.position, g->ball.radius, paddle))
@@ -80,9 +80,9 @@ void	UpdateCollision(Game *g, Player *p)
 		float	bounceIntensity = 400.0f;
 		float	randomness = (float)GetRandomValue(-20, 20);
 
-		g->ball.speed.y = ((normDistance * bounceIntensity) + randomness);
+		g->ball.speed.y = ((normDistance * bounceIntensity) +randomness);
 
-		if (g->ball.speed.x > 0) g->ball.position.x = p->position.x + p->size.x + g->ball.radius;
+		if (g->ball.speed.x > 0) g->ball.position.x = p->position.x +p->size.x +g->ball.radius;
 		else g->ball.position.x = p->position.x - g->ball.radius;
 
 		PlaySound(g->assets.sounds[0]);
@@ -91,7 +91,7 @@ void	UpdateCollision(Game *g, Player *p)
 	}
 }
 
-static	void	ResetBall(Game *g)
+void	ResetBall(Game *g)
 {
 		g->ball.position = (Vector2){ WINDOW_WIDTH/2, WINDOW_HEIGHT/2 };
 		g->ball.speed = (Vector2)
