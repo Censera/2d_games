@@ -35,7 +35,20 @@ void	Draw(Game *g)
 	DrawTextEx(
 	g->assets.font,
 	info_score,
-	(Vector2){ (WINDOW_WIDTH - (float)MeasureTextEx(g->assets.font, info_score, 44, 1).x)/2, MARGIN },
+	(Vector2)
+	{
+		(
+			WINDOW_WIDTH
+			-(float)MeasureTextEx
+			(
+				g->assets.font,
+				info_score,
+				44,
+				1
+			).x
+		)/2,
+		MARGIN
+	},
 	44,	// font size
 	1,	// font spacing
 	FG_COLOR

@@ -15,6 +15,7 @@
 #	define	PADDLE_SPEED	600.0f
 #	define	BALL_SPEED	600.0f
 #	define	BALL_RADIUS	10.0f
+#	define	BOUNCE_INTENSITY	400.0f
 
 #	define	MAX_PARTICLES	50
 

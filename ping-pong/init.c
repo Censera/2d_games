@@ -19,7 +19,7 @@ void	LoadAssets(Assets *a)
 
 void	InitGame(Game *g)
 {
-	float center_y = (WINDOW_HEIGHT /2.0f) - (PADDLE_SIZE.y /2.0f);
+	float center_y = (WINDOW_HEIGHT / 2.0f) - (PADDLE_SIZE.y / 2.0f);
 
 	g->playerOne = (Player)
 	{

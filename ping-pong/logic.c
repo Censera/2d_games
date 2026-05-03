@@ -1,6 +1,6 @@
+#	include	<math.h>
 #	include	<raylib.h>
 #	include	<raymath.h>
-#	include	<math.h>
 #	include	"include/logic.h"
 #	include	"include/config.h"
 #	include	"include/init.h"
@@ -17,10 +17,10 @@ void	UpdatePlayer(Control ctrl, Player *p, float dt)
 	if (ctrl == RIGHT)
 	{
 		if (IsKeyDown(KEY_UP)) p->position.y -= p->speed * dt;
-		if (IsKeyDown(KEY_DOWN))p->position.y += p->speed * dt;
+		if (IsKeyDown(KEY_DOWN)) p->position.y += p->speed * dt;
 	}
 
-	float btmBound = WINDOW_HEIGHT - (p->size.y +MARGIN);
+	float btmBound = WINDOW_HEIGHT - (p->size.y + MARGIN);
 	p->position.y = Clamp(p->position.y, MARGIN, btmBound);
 }
 
@@ -39,12 +39,12 @@ void	UpdateBall(Game *g, float dt)
 
 void	PauseGame(Game *g)
 {
-		g->isPaused = !g->isPaused;
+	g->isPaused = !g->isPaused;
 }
 
 void	ResetGame(Game *g)
 {
-		InitGame(g);
+	InitGame(g);
 }
 
 void	HandleInput(Game *g)
@@ -60,31 +60,33 @@ void	HandleInput(Game *g)
 
 void	UpdateCollision(Game *g, Player *p)
 {
-
 	Rectangle	paddle = (Rectangle)
 	{
 		p->position.x,
 		p->position.y -PADDLE_HITBOX_PADDING,
 		p->size.x,
-		p->size.y + PADDLE_HITBOX_PADDING*2,
+		p->size.y + PADDLE_HITBOX_PADDING * 2.0f,
 	};
 
 	if (CheckCollisionCircleRec(g->ball.position, g->ball.radius, paddle))
 	{
 		g->ball.speed.x *= -1;
 
-		float	paddleCenterY = p->position.y +(p->size.y /2);
-		float	distanceFromCenter = g->ball.position.y -paddleCenterY;
+		float	paddleCenterY = p->position.y + (p->size.y / 2.0f);
+		float	distanceFromCenter = g->ball.position.y - paddleCenterY;
 
-		float	normDistance = distanceFromCenter / (p->size.y /2);
+		float	normDistance = distanceFromCenter / (p->size.y / 2.0f);
 
-		float	bounceIntensity = 400.0f;
 		float	randomness = (float)GetRandomValue(-20, 20);
 
-		g->ball.speed.y = ((normDistance * bounceIntensity) +randomness);
+		g->ball.speed.y = normDistance * BOUNCE_INTENSITY + randomness;
 
-		if (g->ball.speed.x > 0) g->ball.position.x = p->position.x +p->size.x +g->ball.radius;
-		else g->ball.position.x = p->position.x - g->ball.radius;
+		if (g->ball.speed.x > 0)
+			g->ball.position.x = p->position.x
+				+ p->size.x
+				+ g->ball.radius;
+		else
+			g->ball.position.x = p->position.x - g->ball.radius;
 
 		PlaySound(g->assets.sounds[0]);
 
@@ -94,18 +96,22 @@ void	UpdateCollision(Game *g, Player *p)
 
 void	ResetBall(Game *g)
 {
-		g->ball.position = (Vector2){ WINDOW_WIDTH/2, WINDOW_HEIGHT/2 };
-		g->ball.speed = (Vector2)
-		{
-			GetRandomValue(0, 1) ? BALL_SPEED : -BALL_SPEED,
-			(float)GetRandomValue(-100, 100)
-		};
-		g->isPaused = true;
+	g->ball.position = (Vector2)
+	{
+		WINDOW_WIDTH / 2.0f,
+		WINDOW_HEIGHT / 2.0f
+	};
+	g->ball.speed = (Vector2)
+	{
+		GetRandomValue(0, 1) ? BALL_SPEED : -BALL_SPEED,
+		(float)GetRandomValue(-100, 100)
+	};
+	g->isPaused = true;
 }
 
 void	CheckScore(Game *g)
 {
-	if (g->ball.position.x <= -g->ball.radius*2)
+	if (g->ball.position.x <= -g->ball.radius * 2.0f)
 	{
 		g->playerTwo.score++;
 		CreateBurst
@@ -114,7 +120,7 @@ void	CheckScore(Game *g)
 			MAX_PARTICLES,
 			(Vector2)
 			{
-				g->ball.position.x + g->ball.radius*2,
+				g->ball.position.x + g->ball.radius * 2.0f,
 				g->ball.position.y
 			}
 		);
@@ -122,7 +128,7 @@ void	CheckScore(Game *g)
 
 		ResetBall(g);
 	}
-	else if (g->ball.position.x >= WINDOW_WIDTH + g->ball.radius*2)
+	else if (g->ball.position.x >= WINDOW_WIDTH + g->ball.radius * 2.0f)
 	{
 		g->playerOne.score++;
 		CreateBurst
@@ -131,7 +137,7 @@ void	CheckScore(Game *g)
 			MAX_PARTICLES,
 			(Vector2)
 			{
-				g->ball.position.x - g->ball.radius*2,
+				g->ball.position.x - g->ball.radius * 2.0f,
 				g->ball.position.y
 			}
 		);
@@ -167,7 +173,7 @@ void	UpdateParticles(Particle *p, uint8_t count, float dt)
 		{
 			p[i].position.x += p[i].velocity.x * dt;
 			p[i].position.y += p[i].velocity.y * dt;
-			p[i].alpha -= dt*2;
+			p[i].alpha -= dt * 2.0f;
 
 			if (p[i].alpha <= 0) p[i].active = false;
 		}
@@ -176,7 +182,7 @@ void	UpdateParticles(Particle *p, uint8_t count, float dt)
 
 void	CreateBurst(Particle *p, uint8_t count, Vector2 position)
 {
-	uint8_t spawned = 0;
+	uint8_t	spawned = 0;
 	float	angle = 0;
 	float	speed = 0;
 
