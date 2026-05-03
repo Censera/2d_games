@@ -65,7 +65,7 @@ void	UpdateCollision(Game *g, Player *p)
 		p->position.x,
 		p->position.y -PADDLE_HITBOX_PADDING,
 		p->size.x,
-		p->size.y +PADDLE_HITBOX_PADDING,
+		p->size.y +PADDLE_HITBOX_PADDING *2,
 	};
 
 	if (CheckCollisionCircleRec(g->ball.position, g->ball.radius, paddle))
