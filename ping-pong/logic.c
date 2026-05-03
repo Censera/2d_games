@@ -1,5 +1,6 @@
 #	include	<raylib.h>
 #	include	<raymath.h>
+#	include	<math.h>
 #	include	"include/logic.h"
 #	include	"include/config.h"
 #	include	"include/init.h"
@@ -65,7 +66,7 @@ void	UpdateCollision(Game *g, Player *p)
 		p->position.x,
 		p->position.y -PADDLE_HITBOX_PADDING,
 		p->size.x,
-		p->size.y +PADDLE_HITBOX_PADDING *2,
+		p->size.y + PADDLE_HITBOX_PADDING*2,
 	};
 
 	if (CheckCollisionCircleRec(g->ball.position, g->ball.radius, paddle))
@@ -110,7 +111,7 @@ void	CheckScore(Game *g)
 		CreateBurst
 		(
 			g->particles,
-			100,
+			MAX_PARTICLES,
 			(Vector2)
 			{
 				g->ball.position.x + g->ball.radius*2,
@@ -127,7 +128,7 @@ void	CheckScore(Game *g)
 		CreateBurst
 		(
 			g->particles,
-			100,
+			MAX_PARTICLES,
 			(Vector2)
 			{
 				g->ball.position.x - g->ball.radius*2,
@@ -166,7 +167,7 @@ void	UpdateParticles(Particle *p, uint8_t count, float dt)
 		{
 			p[i].position.x += p[i].velocity.x * dt;
 			p[i].position.y += p[i].velocity.y * dt;
-			p[i].alpha -= 2.0f * dt;
+			p[i].alpha -= dt*2;
 
 			if (p[i].alpha <= 0) p[i].active = false;
 		}
@@ -176,6 +177,9 @@ void	UpdateParticles(Particle *p, uint8_t count, float dt)
 void	CreateBurst(Particle *p, uint8_t count, Vector2 position)
 {
 	uint8_t spawned = 0;
+	float	angle = 0;
+	float	speed = 0;
+
 	for (uint8_t i = 0; i < MAX_PARTICLES && spawned < count; i++)
 	{
 		if (!p[i].active)
@@ -184,8 +188,11 @@ void	CreateBurst(Particle *p, uint8_t count, Vector2 position)
 			p[i].position = position;
 			p[i].alpha = 1.0f;
 
-			p[i].velocity.x = (float)GetRandomValue(-200, 200);
-			p[i].velocity.y = (float)GetRandomValue(-200, 200);
+			angle = (float)GetRandomValue(0, 360) * DEG2RAD;
+			speed = (float)GetRandomValue(50, 300);
+
+			p[i].velocity.x = cosf(angle) * speed;
+			p[i].velocity.y = sinf(angle) * speed;
 			spawned++;
 		}
 	}

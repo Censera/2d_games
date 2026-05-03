@@ -16,6 +16,6 @@
 #	define	BALL_SPEED	600.0f
 #	define	BALL_RADIUS	10.0f
 
-#	define	MAX_PARTICLES	100
+#	define	MAX_PARTICLES	50
 
 #endif
