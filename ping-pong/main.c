@@ -6,7 +6,7 @@
 
 int	main(void)
 {
-	Game game = { 0 };
+	Game	game = { 0 };
 
 	SetConfigFlags(FLAG_MSAA_4X_HINT);
 
@@ -24,9 +24,11 @@ int	main(void)
 		UpdateGame(&game);
 
 		BeginDrawing();
+
 			ClearBackground(BG_COLOR);
 			DrawParticles(&game);
 			Draw(&game);
+
 		EndDrawing();
 	}
 

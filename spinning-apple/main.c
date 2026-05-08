@@ -41,7 +41,7 @@ int	main(void)
 
 			ClearBackground(BG_COLOR);
 
-			DrawTextureRec(background, rec, (Vector2) { 0, 0 }, BG_COLOR);
+			DrawTextureRec(background, rec, (Vector2) { 0.0f, 0.0f }, BG_COLOR);
 
 			BeginMode3D(camera);
 

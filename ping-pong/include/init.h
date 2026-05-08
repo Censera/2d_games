@@ -14,15 +14,15 @@ typedef	struct
 	bool	active;
 }	Particle;
 
-typedef enum { LEFT, RIGHT }	Control;
+typedef	enum { LEFT, RIGHT }	Control;
 
-typedef struct
+typedef	struct
 {
 	Font	font; // One font
 	Sound	sounds[2]; // Two sounds
 }	Assets;
 
-typedef struct
+typedef	struct
 {
 	Vector2	position;
 	Vector2	size;
@@ -37,7 +37,7 @@ typedef	struct
 	float	radius;
 }	Ball;
 
-typedef struct
+typedef	struct
 {
 	Particle particles[MAX_PARTICLES];
 	Player playerOne;

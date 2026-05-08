@@ -9,6 +9,7 @@ void	PauseGame(Game *g);
 void	ResetGame(Game *g);
 
 void	ResetBall(Game *g);
+void	ResetPlayers(Game *g);
 
 void	HandleInput(Game *g);
 

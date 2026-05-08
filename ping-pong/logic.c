@@ -109,6 +109,18 @@ void	ResetBall(Game *g)
 	g->isPaused = true;
 }
 
+void	ResetPlayers(Game *g)
+{
+	float center_y = (WINDOW_HEIGHT / 2.0f) - (PADDLE_SIZE.y / 2.0f);
+
+	g->playerOne.position = (Vector2) { MARGIN, center_y };
+	g->playerTwo.position = (Vector2)
+	{
+		WINDOW_WIDTH - (PADDLE_SIZE.x + MARGIN),
+		center_y
+	};
+}
+
 void	CheckScore(Game *g)
 {
 	if (g->ball.position.x <= -g->ball.radius * 2.0f)
@@ -127,6 +139,7 @@ void	CheckScore(Game *g)
 		PlaySound(g->assets.sounds[1]);
 
 		ResetBall(g);
+		ResetPlayers(g);
 	}
 	else if (g->ball.position.x >= WINDOW_WIDTH + g->ball.radius * 2.0f)
 	{
@@ -144,6 +157,7 @@ void	CheckScore(Game *g)
 		PlaySound(g->assets.sounds[1]);
 
 		ResetBall(g);
+		ResetPlayers(g);
 	}
 }
 

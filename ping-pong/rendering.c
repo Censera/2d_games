@@ -12,7 +12,7 @@ void	DrawParticles(Game *g)
 			DrawRectangleV
 			(
 				g->particles[i].position,
-				(Vector2){ 4, 4 },
+				(Vector2){ 4.0f, 4.0f },
 				Fade(FG_COLOR, g->particles[i].alpha)
 			);
 		}
@@ -39,14 +39,14 @@ void	Draw(Game *g)
 	{
 		(
 			WINDOW_WIDTH
-			-(float)MeasureTextEx
+			- (float)MeasureTextEx
 			(
 				g->assets.font,
 				info_score,
 				44,
 				1
 			).x
-		)/2,
+		) / 2,
 		MARGIN
 	},
 	44,	// font size
